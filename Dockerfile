@@ -1,23 +1,15 @@
-# Maven build stage
 FROM maven:3.9.6-eclipse-temurin-17 AS build
-
 WORKDIR /app
 
-# Copy only pom first (cache)
+# Copy all project files
 COPY pom.xml .
-
-# Download dependencies
-RUN mvn -q -e dependency:go-offline
-
-# Copy source
 COPY src ./src
 
-# Build jar
+# Build application (without tests)
 RUN mvn -q -e -DskipTests package
 
-# Runtime stage
-FROM eclipse-temurin:17-jdk
-
+########## RUNTIME IMAGE ##########
+FROM eclipse-temurin:17-jre
 WORKDIR /app
 
 COPY --from=build /app/target/*.jar app.jar
