@@ -1,19 +1,19 @@
-# Base image: JDK 17 + MAVEN automatically installed
-FROM maven:3.9.6-eclipse-temurin-17
+# Maven ile build eden aşama
+FROM maven:3.9.6-eclipse-temurin-17 AS build
 
 WORKDIR /app
 
-# Copy Maven config files first (better caching)
 COPY pom.xml .
-
-# Download dependencies (caching)
 RUN mvn -q -e dependency:go-offline
 
-# Copy source code
 COPY src ./src
+RUN mvn clean package -DskipTests
 
-# Build the project
-RUN mvn -q -e -DskipTests package
+# Çalıştırma aşaması - JDK ile sadece JAR'ı çalıştırıyor
+FROM eclipse-temurin:17-jdk
 
-# Run the app
-CMD ["java", "-jar", "target/timefold-render-server.jar"]
+WORKDIR /app
+COPY --from=build /app/target/*.jar app.jar
+
+EXPOSE 8080
+ENTRYPOINT ["java", "-jar", "app.jar"]
