@@ -6,8 +6,6 @@ import ai.timefold.solver.core.api.solver.Solver;
 import ai.timefold.solver.core.api.solver.SolverFactory;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.Duration;  // ⭐ BUNU EKLE
-
 @RestController
 @RequestMapping("/api/roster")
 public class RosterController {
@@ -20,11 +18,7 @@ public class RosterController {
 
     @PostMapping("/solve")
     public Roster solve(@RequestBody Roster problem) {
-        // ⭐ Her istek için max 3 saniye çalışsın
-        solverFactory.getSolverConfig()
-                .getTerminationConfig()
-                .setSpentLimit(Duration.ofSeconds(3));
-
+        // Burada sadece solver'ı oluşturup aynı thread'de çözdürüyoruz
         Solver<Roster> solver = solverFactory.buildSolver();
         return solver.solve(problem);
     }
