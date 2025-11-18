@@ -9,32 +9,34 @@ import ai.timefold.solver.core.api.score.buildin.hardsoft.HardSoftScore;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @PlanningSolution
 public class Roster {
 
     @ProblemFactCollectionProperty
-    @ValueRangeProvider(id = "employeeRange")   // ⭐ ZORUNLU
-    private List<Employee> employeeList;
+    @ValueRangeProvider(id = "employeeRange")
+    private List<Employee> employeeList = new ArrayList<>();
 
     @ProblemFactCollectionProperty
-    private List<Shift> shiftList;
+    private List<Shift> shiftList = new ArrayList<>();
 
     @PlanningEntityCollectionProperty
-    private List<ShiftAssignment> assignmentList;
+    private List<ShiftAssignment> assignmentList = new ArrayList<>();
 
     @PlanningScore
-    @JsonIgnore   // ⭐ Timefold JSON serializer için zorunlu, yoksa BOOT patlar
+    @JsonIgnore
     private HardSoftScore score;
 
     public Roster() {
     }
 
     public Roster(List<Employee> employeeList, List<Shift> shiftList, List<ShiftAssignment> assignmentList) {
-        this.employeeList = employeeList;
-        this.shiftList = shiftList;
-        this.assignmentList = assignmentList;
+        // null gelse bile boş listeye çeviriyoruz
+        this.employeeList = (employeeList != null) ? employeeList : new ArrayList<>();
+        this.shiftList = (shiftList != null) ? shiftList : new ArrayList<>();
+        this.assignmentList = (assignmentList != null) ? assignmentList : new ArrayList<>();
     }
 
     public List<Employee> getEmployeeList() {
@@ -42,7 +44,7 @@ public class Roster {
     }
 
     public void setEmployeeList(List<Employee> employeeList) {
-        this.employeeList = employeeList;
+        this.employeeList = (employeeList != null) ? employeeList : new ArrayList<>();
     }
 
     public List<Shift> getShiftList() {
@@ -50,7 +52,7 @@ public class Roster {
     }
 
     public void setShiftList(List<Shift> shiftList) {
-        this.shiftList = shiftList;
+        this.shiftList = (shiftList != null) ? shiftList : new ArrayList<>();
     }
 
     public List<ShiftAssignment> getAssignmentList() {
@@ -58,7 +60,7 @@ public class Roster {
     }
 
     public void setAssignmentList(List<ShiftAssignment> assignmentList) {
-        this.assignmentList = assignmentList;
+        this.assignmentList = (assignmentList != null) ? assignmentList : new ArrayList<>();
     }
 
     public HardSoftScore getScore() {
