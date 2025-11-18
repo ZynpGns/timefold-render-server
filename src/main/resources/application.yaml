@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: ${PORT:8080}
 
 solver:
   solutionClass: com.example.timefold.domain.Roster
