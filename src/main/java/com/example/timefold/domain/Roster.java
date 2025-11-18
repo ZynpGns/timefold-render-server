@@ -1,14 +1,13 @@
 package com.example.timefold.domain;
 
-import java.util.List;
-
-import ai.timefold.solver.core.api.domain.solution.PlanningEntityCollectionProperty;
+import ai.timefold.solver.core.api.domain.entity.PlanningEntity;
 import ai.timefold.solver.core.api.domain.solution.PlanningSolution;
-import ai.timefold.solver.core.api.domain.solution.ProblemFactCollectionProperty;
-import ai.timefold.solver.core.api.domain.solution.drools.ProblemFactProperty; // kullanılmıyor ama sorun değil
-import ai.timefold.solver.core.api.domain.valuerange.ValueRangeProvider;
-import ai.timefold.solver.core.api.score.buildin.hardsoft.HardSoftScore;
 import ai.timefold.solver.core.api.domain.solution.PlanningScore;
+import ai.timefold.solver.core.api.domain.solution.ProblemFactCollectionProperty;
+import ai.timefold.solver.core.api.domain.entity.PlanningEntityCollectionProperty;
+import ai.timefold.solver.core.api.score.buildin.hardsoft.HardSoftScore;
+
+import java.util.List;
 
 @PlanningSolution
 public class Roster {
