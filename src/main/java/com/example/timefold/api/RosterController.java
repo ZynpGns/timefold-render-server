@@ -1,25 +1,26 @@
 package com.example.timefold.api;
 
 import com.example.timefold.domain.Roster;
-
-import ai.timefold.solver.core.api.solver.Solver;
-import ai.timefold.solver.core.api.solver.SolverFactory;
+import ai.timefold.solver.core.api.solver.SolverJob;
+import ai.timefold.solver.core.api.solver.SolverManager;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.concurrent.ExecutionException;
 
 @RestController
 @RequestMapping("/api/roster")
 public class RosterController {
 
-    private final SolverFactory<Roster> solverFactory;
+    private final SolverManager<Roster, Long> solverManager;
 
-    public RosterController(SolverFactory<Roster> solverFactory) {
-        this.solverFactory = solverFactory;
+    public RosterController(SolverManager<Roster, Long> solverManager) {
+        this.solverManager = solverManager;
     }
 
     @PostMapping("/solve")
-    public Roster solve(@RequestBody Roster problem) {
-        // Burada sadece solver'ı oluşturup aynı thread'de çözdürüyoruz
-        Solver<Roster> solver = solverFactory.buildSolver();
-        return solver.solve(problem);
+    public Roster solve(@RequestBody Roster problem) throws ExecutionException, InterruptedException {
+        long problemId = System.currentTimeMillis(); // her istek için farklı id
+        SolverJob<Roster, Long> job = solverManager.solve(problemId, problem);
+        return job.getFinalBestSolution();
     }
 }
