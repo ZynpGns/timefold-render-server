@@ -1,10 +1,9 @@
 package com.example.timefold.domain;
 
-import ai.timefold.solver.core.api.domain.entity.PlanningEntity;
 import ai.timefold.solver.core.api.domain.solution.PlanningSolution;
 import ai.timefold.solver.core.api.domain.solution.PlanningScore;
 import ai.timefold.solver.core.api.domain.solution.ProblemFactCollectionProperty;
-import ai.timefold.solver.core.api.domain.entity.PlanningEntityCollectionProperty;
+import ai.timefold.solver.core.api.domain.solution.PlanningEntityCollectionProperty;
 import ai.timefold.solver.core.api.score.buildin.hardsoft.HardSoftScore;
 
 import java.util.List;
@@ -13,7 +12,6 @@ import java.util.List;
 public class Roster {
 
     @ProblemFactCollectionProperty
-    @ValueRangeProvider(id = "employeeRange")
     private List<Employee> employeeList;
 
     @ProblemFactCollectionProperty
