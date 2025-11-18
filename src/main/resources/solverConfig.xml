@@ -1,1 +1,14 @@
-<solver></solver>
+<solver>
+    <solutionClass>com.example.timefold.domain.Roster</solutionClass>
+    <entityClass>com.example.timefold.domain.ShiftAssignment</entityClass>
+
+    <scoreDirectorFactory>
+        <constraintProviderClass>
+            com.example.timefold.solver.RosterConstraintProvider
+        </constraintProviderClass>
+    </scoreDirectorFactory>
+
+    <termination>
+        <secondsSpentLimit>10</secondsSpentLimit>
+    </termination>
+</solver>
