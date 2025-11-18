@@ -10,6 +10,9 @@ import ai.timefold.solver.core.api.score.stream.ConstraintFactory;
 import ai.timefold.solver.core.api.score.stream.ConstraintProvider;
 import ai.timefold.solver.core.api.score.stream.Joiners;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class RosterConstraintProvider implements ConstraintProvider {
 
     @Override
