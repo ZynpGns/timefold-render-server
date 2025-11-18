@@ -21,8 +21,7 @@ public class RosterController {
     public Roster solve(@RequestBody Roster problem)
             throws ExecutionException, InterruptedException {
 
-        // HER çağrı için farklı problemId veriyoruz -> "problemId (1) is already solving" biter
-        long problemId = System.currentTimeMillis();
+        long problemId = System.currentTimeMillis(); // her çağrı için farklı id
 
         SolverJob<Roster, Long> job = solverManager.solve(problemId, problem);
         return job.getFinalBestSolution();
