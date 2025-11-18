@@ -21,28 +21,14 @@
 
     <dependencies>
 
-        <!-- Timefold Solver Starter -->
+        <!-- Timefold Solver -->
         <dependency>
             <groupId>ai.timefold.solver</groupId>
             <artifactId>timefold-solver-spring-boot-starter</artifactId>
             <version>${timefold.version}</version>
         </dependency>
 
-        <!-- JSON-B support is OPTIONAL, kaldırıyorum -->
-        <!--
-        <dependency>
-            <groupId>ai.timefold.solver</groupId>
-            <artifactId>timefold-solver-jsonb</artifactId>
-            <version>${timefold.version}</version>
-        </dependency>
-        -->
-
-        <!-- JSON için Spring Boot kullan -->
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-        </dependency>
-
+        <!-- Web / Jackson (otomatik eklenir) -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -55,6 +41,13 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
                 <configuration>
                     <mainClass>com.example.timefold.TimefoldApplication</mainClass>
                 </configuration>
