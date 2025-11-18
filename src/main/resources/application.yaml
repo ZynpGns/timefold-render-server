@@ -1,10 +1,11 @@
 server:
   port: ${PORT:8080}
 
-solver:
-  solutionClass: com.example.timefold.domain.Roster
-  entityClassList:
-    - com.example.timefold.domain.ShiftAssignment
-  constraintProviderClass: com.example.timefold.solver.RosterConstraintProvider
-  termination:
-    spentLimit: 5s
+timefold:
+  solver:
+    solutionClass: com.example.timefold.domain.Roster
+    entityClassList:
+      - com.example.timefold.domain.ShiftAssignment
+    constraintProviderClass: com.example.timefold.solver.RosterConstraintProvider
+    termination:
+      spentLimit: 5s
