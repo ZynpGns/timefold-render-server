@@ -1,10 +1,13 @@
 package com.example.timefold.domain;
-import ai.timefold.solver.core.api.domain.valuerange.ValueRangeProvider;
+
 import ai.timefold.solver.core.api.domain.solution.PlanningSolution;
 import ai.timefold.solver.core.api.domain.solution.PlanningScore;
 import ai.timefold.solver.core.api.domain.solution.ProblemFactCollectionProperty;
 import ai.timefold.solver.core.api.domain.solution.PlanningEntityCollectionProperty;
+import ai.timefold.solver.core.api.domain.valuerange.ValueRangeProvider;
 import ai.timefold.solver.core.api.score.buildin.hardsoft.HardSoftScore;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.util.List;
 
@@ -12,6 +15,7 @@ import java.util.List;
 public class Roster {
 
     @ProblemFactCollectionProperty
+    @ValueRangeProvider(id = "employeeRange")   // ⭐ ZORUNLU
     private List<Employee> employeeList;
 
     @ProblemFactCollectionProperty
@@ -21,6 +25,7 @@ public class Roster {
     private List<ShiftAssignment> assignmentList;
 
     @PlanningScore
+    @JsonIgnore   // ⭐ Timefold JSON serializer için zorunlu, yoksa BOOT patlar
     private HardSoftScore score;
 
     public Roster() {
@@ -31,8 +36,6 @@ public class Roster {
         this.shiftList = shiftList;
         this.assignmentList = assignmentList;
     }
-
-    // ---- getters / setters ----
 
     public List<Employee> getEmployeeList() {
         return employeeList;
