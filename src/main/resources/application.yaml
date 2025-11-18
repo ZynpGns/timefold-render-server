@@ -3,9 +3,9 @@ server:
 
 timefold:
   solver:
-    solutionClass: com.example.timefold.domain.Roster
-    entityClassList:
+    solution-class: com.example.timefold.domain.Roster
+    entity-class-list:
       - com.example.timefold.domain.ShiftAssignment
-    constraintProviderClass: com.example.timefold.solver.RosterConstraintProvider
+    constraint-provider-class: com.example.timefold.solver.RosterConstraintProvider
     termination:
-      spentLimit: 5s
+      spent-limit: 5s
