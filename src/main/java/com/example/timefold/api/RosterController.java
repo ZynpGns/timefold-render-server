@@ -6,7 +6,6 @@ import ai.timefold.solver.core.api.solver.SolverJob;
 import ai.timefold.solver.core.api.solver.SolverManager;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.UUID;
 import java.util.concurrent.ExecutionException;
 
 @RestController
@@ -23,7 +22,7 @@ public class RosterController {
     @PostMapping("/solve")
     public Roster solve(@RequestBody Roster problem) throws ExecutionException, InterruptedException {
         long problemId = 1L; // tek problem için sabit id
-        SolverJob<Roster, Long> job = solverManager.solve(problemId, id -> problem);
+        SolverJob<Roster, Long> job = solverManager.solve(problemId, problem);
         return job.getFinalBestSolution();
     }
 }
