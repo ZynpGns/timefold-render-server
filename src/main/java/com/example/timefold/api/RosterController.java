@@ -6,6 +6,8 @@ import ai.timefold.solver.core.api.solver.Solver;
 import ai.timefold.solver.core.api.solver.SolverFactory;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.Duration;  // ⭐ BUNU EKLE
+
 @RestController
 @RequestMapping("/api/roster")
 public class RosterController {
@@ -16,12 +18,14 @@ public class RosterController {
         this.solverFactory = solverFactory;
     }
 
-    /** Flutter'dan POST ile bir Roster gönder, çözülmüş halini geri al. */
     @PostMapping("/solve")
     public Roster solve(@RequestBody Roster problem) {
-        // Her istek için yeni ve bağımsız bir solver oluştur
+        // ⭐ Her istek için max 3 saniye çalışsın
+        solverFactory.getSolverConfig()
+                .getTerminationConfig()
+                .setSpentLimit(Duration.ofSeconds(3));
+
         Solver<Roster> solver = solverFactory.buildSolver();
-        // Problemi senkron şekilde çöz ve en iyi çözümü geri döndür
         return solver.solve(problem);
     }
 }
